@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,7 @@ namespace Nettoyeur
     public partial class MainWindow : Window
     {
         private string _SoftwareName = "MonLogiciel";
+        string version = "0.0.0";
         public DirectoryInfo WinTemp;
         public DirectoryInfo AppTemp;
         public MainWindow()
@@ -32,9 +35,43 @@ namespace Nettoyeur
             SetAppName();
             WinTemp = new DirectoryInfo(@"C:\Windows\Temp");
             AppTemp = new DirectoryInfo(System.IO.Path.GetTempPath());
-            
+            CheckActu();
+            GetDate();
+
+
 
         }
+
+        public void CheckActu()
+        {
+            string url = "http://localhost:81/CleanMyComputer/informationPrimaire.txt";
+            using (WebClient client = new WebClient())
+            {
+                string information = client.DownloadString(url);
+                if(information != String.Empty)
+                {
+                    actu.Content = information;
+                    actu.Visibility = Visibility.Visible;   
+                    bandeau.Visibility = Visibility.Visible;
+                }
+            };
+        }
+        public void CheckVersion()
+        {
+            string url = "http://localhost:81/CleanMyComputer/version.txt";
+            using (WebClient client = new WebClient())
+            {
+                string v = client.DownloadString(url);
+                if (version != v)
+                {
+                    MessageBox.Show("Une nouvelle version est disponible !", "Mise à jour", MessageBoxButton.OK, MessageBoxImage.Information);
+                } else
+                {
+                    MessageBox.Show("Votre logiciel est à jour", "Mise à jour", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            };
+        }
+
 
         public long DirectorySize(DirectoryInfo directory)
         {
@@ -93,9 +130,14 @@ namespace Nettoyeur
             AnalyseFolders();
         }
 
+        /// <summary>
+        /// Nettoie le presse papier, le dossier WinTemp et AppTemp
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonNettoyage(object sender, RoutedEventArgs e)
         {
-            Clipboard.Clear(); // Vide le presse-papier
+            Clipboard.Clear();
             
             try
             {
@@ -120,22 +162,31 @@ namespace Nettoyeur
             espace.Content = "0 Mb";
         }
 
+
         private void ButtonHistorique(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Fonction à développer", caption: "historique", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        /// <summary>
+        /// Verifie la version du logiciel depuis un fichier texte sur le serveur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonMaj(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Votre logiciel est à jour !", caption: SoftwareTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+            CheckVersion();
         }
 
+        /// <summary>
+        /// A l'appui du bouton, redirige l'utilisateur vers une page web
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonMoreInfo(object sender, RoutedEventArgs e)
         {
-            // Bonne pratique si jamais absence chez l'utilisateur de navigateur web
             try
             {
-                // Pour ouvrir une page web depuis le logiciel
                 Process.Start(new ProcessStartInfo("https://github.com/Rijenth")
                 {
                     UseShellExecute = true
@@ -163,11 +214,27 @@ namespace Nettoyeur
             {
                 Console.WriteLine("Impossible d'analyser les dossiers : " + error.Message);
             }
-            
+
             // On met à jour les champs de l'application
             espace.Content = totalSize + " Mb à nettoyer";
             Titre.Content = "Analyse effectuée";
             date.Content = DateTime.UtcNow.ToString("dddd, dd MMMM yyyy");
+            SaveDate();
+        }
+       
+        public void SaveDate()
+        {
+            string DateOfLastAnalyse = DateTime.UtcNow.ToString("dddd, dd MMMM yyyy");
+            File.WriteAllText("date.txt", DateOfLastAnalyse);   
+        }
+
+        public void GetDate()
+        {
+            string LastAnalyseDate = File.ReadAllText("date.txt");
+            if(LastAnalyseDate != String.Empty)
+            {
+                date.Content = LastAnalyseDate;
+            }
         }
     }
 }

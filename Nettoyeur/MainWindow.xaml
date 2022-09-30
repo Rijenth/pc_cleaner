@@ -10,9 +10,9 @@
     <Grid>
         <Rectangle HorizontalAlignment="Center" Height="165" Stroke="Black" VerticalAlignment="Top" Width="1000" Fill="#FF007791"/>
         <Label x:Name="Titre" Content="Analyse du PC requise" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Width="531" Height="45" Foreground="White" FontFamily="Aria Nova" FontSize="30" FontWeight="Bold"/>
-        <Label Content="Espaces libérés :" HorizontalAlignment="Left" Margin="30,70,0,0" VerticalAlignment="Top" Width="160" Height="36" Foreground="White" FontFamily="Aria Nova" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Espaces à nettoyer :" HorizontalAlignment="Left" Margin="30,70,0,0" VerticalAlignment="Top" Width="207" Height="36" Foreground="White" FontFamily="Aria Nova" FontSize="20" FontWeight="Bold"/>
         <Label Content="Dernière analyse :" HorizontalAlignment="Left" Margin="30,100,0,0" VerticalAlignment="Top" Width="178" Height="33" Foreground="White" FontFamily="Aria Nova" FontSize="20" FontWeight="Bold"/>
-        <Label x:Name="espace" Content="Inconnu" HorizontalAlignment="Left" Margin="195,70,0,0" VerticalAlignment="Top" Width="411" Height="36" Foreground="White" FontFamily="Aria Nova" FontSize="20"/>
+        <Label x:Name="espace" Content="Inconnu" HorizontalAlignment="Left" Margin="228,70,0,0" VerticalAlignment="Top" Width="411" Height="36" Foreground="White" FontFamily="Aria Nova" FontSize="20"/>
         <Label x:Name="date" Content="Jamais" HorizontalAlignment="Left" Margin="213,100,0,0" VerticalAlignment="Top" Width="369" Height="33" Foreground="White" FontFamily="Aria Nova" FontSize="20" />
         <Button Content="Analyser" HorizontalAlignment="Left" Margin="650,50,0,0" VerticalAlignment="Top" Width="250" Height="70" Foreground="White" FontFamily="Aria Nova" FontSize="30" FontWeight="Bold" Background="#FF007991" BorderThickness="4,4,4,4" BorderBrush="White" Click="ButtonAnalyse"/>
         <Rectangle HorizontalAlignment="Center" Height="13" Margin="0,166,0,0" VerticalAlignment="Top" Width="1000" Fill="#FFD9E9EC"/>
@@ -28,8 +28,8 @@
         <!-- Footer -->
         <Rectangle HorizontalAlignment="Center" Height="134" Margin="0,550,0,0" VerticalAlignment="Top" Width="1000" Fill="#FF86D9EC"/>
         <Label x:Name="copyright" Content="Copyright 2022 - Rijenth" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,573,0,0" VerticalAlignment="Top" Width="960" Height="44" Foreground="Black" FontFamily="Aria Nova" FontSize="25"/>
-        <Rectangle HorizontalAlignment="Center" Height="47" Margin="0,637,0,0" VerticalAlignment="Top" Width="1000" Fill="#FF36ABC5" Visibility="Hidden"/>
-        <Label x:Name="actu" Content="2022" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,640,0,0" VerticalAlignment="Top" Width="960" Height="44" Foreground="Black" FontFamily="Aria Nova" FontSize="30" FontWeight="Bold" Visibility="Hidden" />
+        <Rectangle x:Name="bandeau" HorizontalAlignment="Center" Height="56" Margin="0,628,0,0" VerticalAlignment="Top" Width="1000" Fill="#FF36ABC5" Visibility="Hidden"/>
+        <Label x:Name="actu" Content="2022" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,628,0,0" VerticalAlignment="Top" Width="960" Height="44" Foreground="Black" FontFamily="Aria Nova" FontSize="20" FontWeight="Bold" Visibility="Hidden" />
         <Image HorizontalAlignment="Left" Height="60" Margin="224,230,0,0" VerticalAlignment="Top" Width="60" Source="/loupe.png" IsHitTestVisible="False"/>
         <Image HorizontalAlignment="Left" Height="60" Margin="715,230,0,0" VerticalAlignment="Top" Width="60" Source="/historique.png" IsHitTestVisible="False"/>
         <Image HorizontalAlignment="Left" Height="60" Margin="224,408,0,0" VerticalAlignment="Top" Width="60" Source="/miseajour.png" IsHitTestVisible="False"/>
