@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Nettoyeur"
         mc:Ignorable="d"
         x:Name="appName"
-        Title="Nettoyeur" Height="700" Width="1000" Icon="/Laravel.png" ResizeMode="NoResize">
+        Title="Nettoyeur" Height="700" Width="1000" Icon="/photo3idea_studio.png" ResizeMode="NoResize">
     <Grid>
         <Rectangle HorizontalAlignment="Center" Height="165" Stroke="Black" VerticalAlignment="Top" Width="1000" Fill="#FF007791"/>
         <Label x:Name="Titre" Content="Analyse du PC requise" HorizontalAlignment="Left" Margin="30,20,0,0" VerticalAlignment="Top" Width="531" Height="45" Foreground="White" FontFamily="Aria Nova" FontSize="30" FontWeight="Bold"/>

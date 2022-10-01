@@ -2,18 +2,23 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>photo3idea_studio.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="historique.png" />
     <None Remove="information.png" />
-    <None Remove="Laravel.png" />
     <None Remove="loupe.png" />
     <None Remove="miseajour.png" />
+    <None Remove="photo3idea_studio.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="photo3idea_studio.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,10 +34,7 @@
     <Resource Include="miseajour.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Laravel.png">
+    <Resource Include="photo3idea_studio.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

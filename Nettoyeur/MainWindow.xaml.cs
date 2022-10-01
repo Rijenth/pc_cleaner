@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace Nettoyeur
 {
@@ -44,34 +45,51 @@ namespace Nettoyeur
 
         public void CheckActu()
         {
-            string url = "http://localhost:81/CleanMyComputer/informationPrimaire.txt";
-            using (WebClient client = new WebClient())
+            try
             {
-                string information = client.DownloadString(url);
-                if(information != String.Empty)
+                string url = "http://localhost:81/CleanMyComputer/informationPrimaire.txt";
+                using (WebClient client = new WebClient())
                 {
-                    actu.Content = information;
-                    actu.Visibility = Visibility.Visible;   
-                    bandeau.Visibility = Visibility.Visible;
-                }
-            };
+                    string information = client.DownloadString(url);
+                    if (information != String.Empty)
+                    {
+                        actu.Content = information;
+                        actu.Visibility = Visibility.Visible;
+                        bandeau.Visibility = Visibility.Visible;
+                    }
+                };
+            } catch (Exception error)
+            {
+                Console.WriteLine("Erreur : " + error.Message);   
+            }
+            
         }
+
+        
         public void CheckVersion()
         {
             string url = "http://localhost:81/CleanMyComputer/version.txt";
+
             using (WebClient client = new WebClient())
             {
-                string v = client.DownloadString(url);
-                if (version != v)
+                try
                 {
-                    MessageBox.Show("Une nouvelle version est disponible !", "Mise à jour", MessageBoxButton.OK, MessageBoxImage.Information);
-                } else
+                    string v = client.DownloadString(url);
+                    if (version != v)
+                    {
+                        MessageBox.Show("Une nouvelle version est disponible !", "Mise à jour", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Votre logiciel est à jour", "Mise à jour", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                } catch 
                 {
-                    MessageBox.Show("Votre logiciel est à jour", "Mise à jour", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Connection au serveur impossible.");
                 }
+                
             };
         }
-
 
         public long DirectorySize(DirectoryInfo directory)
         {
@@ -230,11 +248,14 @@ namespace Nettoyeur
 
         public void GetDate()
         {
-            string LastAnalyseDate = File.ReadAllText("date.txt");
-            if(LastAnalyseDate != String.Empty)
+            if (File.Exists("date.txt"))
             {
-                date.Content = LastAnalyseDate;
-            }
+                string LastAnalyseDate = File.ReadAllText("date.txt");
+                if (LastAnalyseDate != String.Empty)
+                {
+                    date.Content = LastAnalyseDate;
+                }
+            }   
         }
     }
 }
