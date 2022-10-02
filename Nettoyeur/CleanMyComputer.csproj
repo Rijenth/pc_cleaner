@@ -7,6 +7,8 @@
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>photo3idea_studio.ico</ApplicationIcon>
+    <RootNamespace>CleanMyComputer</RootNamespace>
+    <AssemblyName>CleanMyComputer</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
